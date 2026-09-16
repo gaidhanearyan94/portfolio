@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aryan Ramesh Gaidhane — AI Engineering Student</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0e14;
+    --panel:#10151d;
+    --panel-2:#141b25;
+    --line: rgba(139,152,168,0.16);
+    --line-strong: rgba(139,152,168,0.28);
+    --text:#e7edf5;
+    --muted:#8b98a8;
+    --mint:#43d17a;
+    --mint-dim: rgba(67,209,122,0.14);
+    --amber:#f0a84e;
+    --amber-dim: rgba(240,168,78,0.14);
+    --radius: 10px;
+    --font-head: 'Sora', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:
+      linear-gradient(180deg, rgba(67,209,122,0.05), transparent 320px),
+      repeating-linear-gradient(0deg, var(--line) 0px, transparent 1px, transparent 64px),
+      repeating-linear-gradient(90deg, var(--line) 0px, transparent 1px, transparent 64px),
+      var(--bg);
+    color:var(--text);
+    font-family: var(--font-head);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  section{padding: 96px 6vw;}
+  @media (max-width: 720px){ section{padding: 64px 6vw;} }
+  .wrap{max-width:1180px;margin:0 auto;}
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:0.8rem;
+    color:var(--mint);
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    margin-bottom:14px;
+  }
+  .eyebrow .idx{color:var(--muted);}
+  .eyebrow::after{content:"";flex:1;height:1px;background:var(--line);}
+  h1,h2,h3{font-family:var(--font-head);font-weight:700;letter-spacing:-0.01em;}
+  .mono{font-family:var(--font-mono);}
+  .muted{color:var(--muted);}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(10,14,20,0.82);
+    backdrop-filter: blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    max-width:1180px;margin:0 auto;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 6vw;
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.05rem;}
+  .brand .mark{
+    width:34px;height:34px;border:1px solid var(--line-strong);border-radius:8px;
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--font-mono);font-size:0.8rem;color:var(--mint);
+    background:var(--panel);
+  }
+  .navlinks{display:flex;gap:28px;font-size:0.92rem;color:var(--muted);}
+  .navlinks a:hover{color:var(--text);}
+  .nav-cta{
+    font-family:var(--font-mono);font-size:0.82rem;
+    border:1px solid var(--line-strong);border-radius:8px;
+    padding:9px 16px;color:var(--text);
+    display:flex;align-items:center;gap:8px;
+  }
+  .nav-cta:hover{border-color:var(--mint);color:var(--mint);}
+  .navtoggle{display:none;background:none;border:1px solid var(--line-strong);border-radius:8px;color:var(--text);padding:8px 10px;font-family:var(--font-mono);}
+  @media (max-width: 860px){
+    .navlinks{display:none;}
+    .navtoggle{display:block;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding-top:64px;
+    display:grid;grid-template-columns: 1.1fr 0.9fr;gap:56px;align-items:center;
+  }
+  @media (max-width:900px){ .hero{grid-template-columns:1fr; padding-top:40px;} }
+  .status{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--font-mono);font-size:0.78rem;color:var(--mint);
+    border:1px solid var(--line-strong);border-radius:100px;padding:6px 14px;
+    margin-bottom:22px;
+  }
+  .status .dot{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 3px var(--mint-dim);}
+  .hero h1{
+    font-size:clamp(2.4rem, 4.6vw, 3.6rem);
+    line-height:1.08;
+    margin-bottom:22px;
+  }
+  .hero h1 .accent{color:var(--mint);}
+  .hero p.lead{color:var(--muted);font-size:1.05rem;max-width:520px;margin-bottom:34px;}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:30px;}
+  .btn{
+    font-family:var(--font-mono);font-size:0.86rem;
+    padding:13px 22px;border-radius:8px;
+    display:inline-flex;align-items:center;gap:10px;
+    border:1px solid transparent;
+    transition:transform .12s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--mint);color:#08130b;font-weight:600;}
+  .btn-ghost{border:1px solid var(--line-strong);color:var(--text);}
+  .btn-ghost:hover{border-color:var(--mint);color:var(--mint);}
+  .socials{display:flex;gap:14px;}
+  .socials a{
+    width:38px;height:38px;border:1px solid var(--line-strong);border-radius:8px;
+    display:flex;align-items:center;justify-content:center;color:var(--muted);
+  }
+  .socials a:hover{color:var(--mint);border-color:var(--mint);}
+
+  .terminal{
+    background:var(--panel);border:1px solid var(--line-strong);border-radius:var(--radius);
+    box-shadow:0 30px 60px -30px rgba(0,0,0,0.6);
+    overflow:hidden;
+  }
+  .terminal .bar{
+    display:flex;align-items:center;gap:8px;padding:12px 16px;
+    border-bottom:1px solid var(--line);background:var(--panel-2);
+  }
+  .terminal .bar span{width:10px;height:10px;border-radius:50%;background:var(--line-strong);}
+  .terminal .bar .path{margin-left:10px;font-family:var(--font-mono);font-size:0.76rem;color:var(--muted);}
+  .terminal .body{padding:22px 20px;font-family:var(--font-mono);font-size:0.86rem;}
+  .terminal .body .l{margin-bottom:9px;color:var(--muted);}
+  .terminal .body .l .k{color:var(--amber);}
+  .terminal .body .l .v{color:var(--text);}
+  .terminal .body .l .s{color:var(--mint);}
+  .ledger{margin-top:18px;border-top:1px solid var(--line);}
+  .ledger-row{
+    display:flex;justify-content:space-between;align-items:baseline;
+    padding:12px 0;border-bottom:1px solid var(--line);
+    font-family:var(--font-mono);
+  }
+  .ledger-row .num{color:var(--mint);font-size:1.15rem;font-weight:700;}
+  .ledger-row .lbl{color:var(--muted);font-size:0.8rem;}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid;grid-template-columns: 0.9fr 1.1fr;gap:40px;}
+  @media (max-width:860px){.about-grid{grid-template-columns:1fr;}}
+  .card{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:28px;
+  }
+  .facts{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:20px;}
+  .fact .k{font-family:var(--font-mono);font-size:0.72rem;color:var(--muted);text-transform:lowercase;margin-bottom:4px;}
+  .fact .v{font-size:0.95rem;}
+  .about-text h2{font-size:1.8rem;margin-bottom:16px;}
+  .about-text p{color:var(--muted);margin-bottom:14px;max-width:60ch;}
+  .tag{
+    display:inline-block;font-family:var(--font-mono);font-size:0.74rem;
+    border:1px solid var(--line-strong);border-radius:6px;padding:5px 10px;
+    color:var(--muted);margin:4px 6px 0 0;
+  }
+
+  /* ---------- SKILLS ---------- */
+  .skill-row{margin-bottom:20px;}
+  .skill-top{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:0.85rem;margin-bottom:8px;}
+  .skill-top .pct{color:var(--mint);}
+  .track{height:6px;background:var(--panel-2);border:1px solid var(--line);border-radius:100px;overflow:hidden;}
+  .fill{height:100%;background:linear-gradient(90deg, var(--mint), #7be6a6);border-radius:100px;}
+  .skills-columns{display:grid;grid-template-columns:1fr 1fr;gap:48px;}
+  @media (max-width:780px){.skills-columns{grid-template-columns:1fr;}}
+  .toolbelt{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;}
+  .tool{
+    font-family:var(--font-mono);font-size:0.8rem;color:var(--text);
+    border:1px solid var(--line-strong);border-radius:8px;padding:10px 14px;
+    background:var(--panel);
+  }
+
+  /* ---------- PROJECT ---------- */
+  .project-card{
+    background:var(--panel);border:1px solid var(--line-strong);border-radius:var(--radius);
+    overflow:hidden;display:grid;grid-template-columns: 1fr 1fr;
+  }
+  @media (max-width:860px){.project-card{grid-template-columns:1fr;}}
+  .project-visual{
+    background:
+      radial-gradient(circle at 30% 20%, rgba(67,209,122,0.16), transparent 55%),
+      var(--panel-2);
+    border-right:1px solid var(--line);
+    padding:32px;display:flex;flex-direction:column;justify-content:center;gap:16px;
+  }
+  @media (max-width:860px){.project-visual{border-right:none;border-bottom:1px solid var(--line);}}
+  .mini-chart{display:flex;align-items:flex-end;gap:6px;height:90px;}
+  .mini-chart .bar-el{flex:1;background:linear-gradient(180deg, var(--mint), rgba(67,209,122,0.25));border-radius:3px 3px 0 0;}
+  .insight-chip{
+    font-family:var(--font-mono);font-size:0.76rem;color:var(--amber);
+    border:1px solid var(--amber-dim);background:var(--amber-dim);
+    border-radius:6px;padding:8px 12px;display:inline-flex;gap:8px;align-items:center;
+  }
+  .project-content{padding:32px;}
+  .project-content .kicker{font-family:var(--font-mono);font-size:0.76rem;color:var(--mint);margin-bottom:10px;}
+  .project-content h3{font-size:1.5rem;margin-bottom:12px;}
+  .project-content p{color:var(--muted);margin-bottom:18px;}
+  .feature-list{display:grid;gap:10px;margin-bottom:20px;}
+  .feature-list li{list-style:none;display:flex;gap:10px;align-items:flex-start;font-size:0.92rem;color:var(--text);}
+  .feature-list li::before{content:"›";color:var(--mint);font-family:var(--font-mono);font-weight:700;}
+  .stack{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px;}
+  .proj-links{display:flex;gap:14px;}
+  .proj-links a{font-family:var(--font-mono);font-size:0.82rem;display:flex;align-items:center;gap:8px;color:var(--text);border:1px solid var(--line-strong);border-radius:8px;padding:10px 16px;}
+  .proj-links a:hover{border-color:var(--mint);color:var(--mint);}
+
+  /* ---------- PROCESS ---------- */
+  .process{display:grid;grid-template-columns:repeat(6,1fr);gap:0;position:relative;}
+  @media (max-width:960px){.process{grid-template-columns:repeat(3,1fr);row-gap:36px;}}
+  @media (max-width:600px){.process{grid-template-columns:repeat(2,1fr);}}
+  .step{text-align:center;padding:0 10px;position:relative;}
+  .step .n{
+    width:48px;height:48px;border-radius:50%;border:1px solid var(--line-strong);
+    display:flex;align-items:center;justify-content:center;margin:0 auto 16px;
+    font-family:var(--font-mono);color:var(--mint);background:var(--panel);
+    position:relative;z-index:2;
+  }
+  .step h4{font-size:0.98rem;margin-bottom:8px;}
+  .step p{font-size:0.82rem;color:var(--muted);}
+  .process::before{
+    content:"";position:absolute;top:24px;left:8%;right:8%;height:1px;background:var(--line);z-index:1;
+  }
+  @media (max-width:960px){.process::before{display:none;}}
+
+  /* ---------- LEARNING / GOALS ---------- */
+  .goals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  @media (max-width:860px){.goals-grid{grid-template-columns:1fr;}}
+  .goal{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:24px;}
+  .goal .tagline{font-family:var(--font-mono);font-size:0.74rem;color:var(--amber);margin-bottom:12px;}
+  .goal h4{font-size:1.05rem;margin-bottom:10px;}
+  .goal p{color:var(--muted);font-size:0.9rem;}
+
+  /* ---------- STATS STRIP ---------- */
+  .stat-strip{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;}
+  @media (max-width:780px){.stat-strip{grid-template-columns:repeat(2,1fr);}}
+  .stat{padding:26px 20px;border-right:1px solid var(--line);}
+  .stat:last-child{border-right:none;}
+  @media (max-width:780px){ .stat:nth-child(2n){border-right:none;} }
+  .stat .v{font-family:var(--font-mono);font-size:1.7rem;color:var(--mint);margin-bottom:6px;}
+  .stat .l{font-size:0.82rem;color:var(--muted);}
+
+  /* ---------- CONTACT ---------- */
+  .contact-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:40px;}
+  @media (max-width:860px){.contact-grid{grid-template-columns:1fr;}}
+  .contact-info .row{display:flex;gap:14px;align-items:flex-start;margin-bottom:22px;}
+  .contact-info .ic{
+    width:38px;height:38px;border:1px solid var(--line-strong);border-radius:8px;
+    display:flex;align-items:center;justify-content:center;color:var(--mint);flex-shrink:0;
+  }
+  .contact-info .row .t{font-size:0.78rem;color:var(--muted);font-family:var(--font-mono);}
+  .contact-info .row .d{font-size:0.98rem;}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media (max-width:600px){.form-grid{grid-template-columns:1fr;}}
+  input, textarea{
+    width:100%;background:var(--panel-2);border:1px solid var(--line-strong);border-radius:8px;
+    padding:13px 14px;color:var(--text);font-family:var(--font-head);font-size:0.92rem;
+  }
+  input::placeholder, textarea::placeholder{color:var(--muted);}
+  textarea{resize:vertical;min-height:120px;margin-bottom:18px;}
+  input:focus, textarea:focus{outline:2px solid var(--mint);outline-offset:1px;}
+
+  footer{
+    border-top:1px solid var(--line);padding:28px 6vw;
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:var(--font-mono);font-size:0.78rem;color:var(--muted);
+  }
+  @media (max-width:600px){footer{flex-direction:column;gap:10px;text-align:center;}}
+
+  .section-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:36px;flex-wrap:wrap;gap:12px;}
+  .section-head h2{font-size:1.9rem;}
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="brand"><span class="mark">AG</span> Aryan Gaidhane</div>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#project">Project</a>
+      <a href="#process">Process</a>
+      <a href="#goals">Journey</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="nav-cta" href="#contact">./say_hello</a>
+  </nav>
+</header>
+
+<section class="hero wrap">
+  <div>
+    <div class="status"><span class="dot"></span> open to internships &amp; collaborations</div>
+    <h1>I build things that<br>learn from <span class="accent">data</span>,<br>not just run code.</h1>
+    <p class="lead">I'm Aryan Ramesh Gaidhane, a 2nd-year AI Engineering student at G H Raisoni College, Nagpur. I like taking an idea, breaking it into logic, and shipping something that actually works — usually in Python, sometimes in C when I want to feel the machine underneath.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#project">View my project</a>
+      <a class="btn btn-ghost" href="#contact">Get in touch</a>
+    </div>
+    <div class="socials">
+      <a href="#" title="GitHub" aria-label="GitHub">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.58 2 12.21c0 4.47 2.87 8.26 6.84 9.6.5.1.68-.22.68-.49 0-.24-.01-1.05-.01-1.9-2.78.62-3.37-1.2-3.37-1.2-.45-1.19-1.11-1.5-1.11-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.55 2.34 1.1 2.91.84.09-.66.34-1.1.62-1.35-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.32.1-2.75 0 0 .84-.27 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.32 2.75-1.05 2.75-1.05.55 1.43.2 2.49.1 2.75.64.72 1.03 1.63 1.03 2.75 0 3.94-2.35 4.81-4.58 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.21C22 6.58 17.52 2 12 2Z" fill="currentColor"/></svg>
+      </a>
+      <a href="#" title="LinkedIn" aria-label="LinkedIn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6.94 8.5H3.56V20h3.38V8.5ZM5.25 3.5a1.94 1.94 0 1 0 0 3.88 1.94 1.94 0 0 0 0-3.88ZM20.5 20h-3.37v-6.17c0-1.47-.53-2.48-1.85-2.48-1.01 0-1.61.68-1.87 1.34-.1.24-.13.58-.13.92V20h-3.37s.05-10.75 0-11.5h3.37v1.63c.45-.7 1.25-1.7 3.05-1.7 2.23 0 3.9 1.45 3.9 4.58V20Z" fill="currentColor"/></svg>
+      </a>
+      <a href="#" title="Email" aria-label="Email">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 5h18v14H3V5Zm2 2.4V17h14V7.4l-7 5.1-7-5.1Zm.6-.9 6.4 4.7 6.4-4.7H5.6Z" fill="currentColor"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="terminal">
+    <div class="bar"><span></span><span></span><span></span><span class="path">~/aryan/whoami.py</span></div>
+    <div class="body">
+      <div class="l"><span class="k">name</span> = <span class="v">"Aryan Ramesh Gaidhane"</span></div>
+      <div class="l"><span class="k">role</span> = <span class="v">"AI Engineering Student"</span></div>
+      <div class="l"><span class="k">college</span> = <span class="v">"G H Raisoni College, Nagpur"</span></div>
+      <div class="l"><span class="k">year</span> = <span class="v">2</span></div>
+      <div class="l"><span class="k">stack</span> = <span class="v">["Python", "C"]</span></div>
+      <div class="l"><span class="k">status</span> = <span class="s">"learning in public"</span></div>
+      <div class="ledger">
+        <div class="ledger-row"><span class="lbl">years of coding</span><span class="num">02+</span></div>
+        <div class="ledger-row"><span class="lbl">minor projects shipped</span><span class="num">01</span></div>
+        <div class="ledger-row"><span class="lbl">languages</span><span class="num">Py / C</span></div>
+        <div class="ledger-row" style="border-bottom:none;"><span class="lbl">currently exploring</span><span class="num">AI / ML</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="wrap">
+  <div class="section-head">
+    <div class="eyebrow"><span class="idx">01</span> about</div>
+  </div>
+  <div class="about-grid">
+    <div class="card">
+      <div class="fact"><div class="k">name</div><div class="v">Aryan Ramesh Gaidhane</div></div>
+      <div class="facts">
+        <div class="fact"><div class="k">college</div><div class="v">G H Raisoni College</div></div>
+        <div class="fact"><div class="k">location</div><div class="v">Nagpur, India</div></div>
+        <div class="fact"><div class="k">year</div><div class="v">2nd Year, AI Engineering</div></div>
+        <div class="fact"><div class="k">availability</div><div class="v">Open to internships</div></div>
+      </div>
+      <div style="margin-top:22px;">
+        <span class="tag">Python</span><span class="tag">C</span><span class="tag">DSA</span><span class="tag">AI/ML Basics</span><span class="tag">Git</span>
+      </div>
+    </div>
+    <div class="about-text">
+      <h2>Second year, first real project — many more coming.</h2>
+      <p>I got into AI Engineering because I wanted to understand what's actually happening behind the tools everyone talks about. Python gave me the speed to experiment, and C taught me to respect memory, pointers, and the cost of every line I write.</p>
+      <p>My first minor project turned that curiosity into something practical: a Personal Finance Tracker that doesn't just log your expenses, but uses AI to tell you something useful about them. It's small, but it's mine end-to-end — from the logic to the insights.</p>
+      <p>Right now I'm splitting my time between strengthening data structures &amp; algorithms in C, and going deeper into machine learning fundamentals in Python. This site will grow project by project as I do.</p>
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="wrap">
+  <div class="section-head">
+    <div class="eyebrow"><span class="idx">02</span> skills</div>
+  </div>
+  <div class="skills-columns">
+    <div>
+      <div class="skill-row">
+        <div class="skill-top"><span>Python</span><span class="pct">85%</span></div>
+        <div class="track"><div class="fill" style="width:85%"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-top"><span>C Programming</span><span class="pct">75%</span></div>
+        <div class="track"><div class="fill" style="width:75%"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-top"><span>Data Structures &amp; Algorithms</span><span class="pct">70%</span></div>
+        <div class="track"><div class="fill" style="width:70%"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-top"><span>Machine Learning Fundamentals</span><span class="pct">55%</span></div>
+        <div class="track"><div class="fill" style="width:55%"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-top"><span>Git &amp; Version Control</span><span class="pct">65%</span></div>
+        <div class="track"><div class="fill" style="width:65%"></div></div>
+      </div>
+    </div>
+    <div>
+      <p class="muted" style="margin-bottom:14px;">Tools &amp; things I reach for while building</p>
+      <div class="toolbelt">
+        <span class="tool">Python</span>
+        <span class="tool">C</span>
+        <span class="tool">Pandas</span>
+        <span class="tool">NumPy</span>
+        <span class="tool">Matplotlib</span>
+        <span class="tool">scikit-learn</span>
+        <span class="tool">SQLite</span>
+        <span class="tool">VS Code</span>
+        <span class="tool">Git / GitHub</span>
+        <span class="tool">Jupyter Notebook</span>
+      </div>
+      <div class="card" style="margin-top:26px;">
+        <div class="fact"><div class="k">how I learn</div>
+        <div class="v" style="margin-top:8px;color:var(--muted);font-size:0.92rem;">Mostly by breaking things on purpose in small scripts, then rebuilding them properly once I understand why they broke.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="project" class="wrap">
+  <div class="section-head">
+    <div class="eyebrow"><span class="idx">03</span> featured project</div>
+  </div>
+  <div class="project-card">
+    <div class="project-visual">
+      <div class="insight-chip">⚡ AI insight: spending on food up 18% this month</div>
+      <div class="mini-chart">
+        <div class="bar-el" style="height:35%"></div>
+        <div class="bar-el" style="height:55%"></div>
+        <div class="bar-el" style="height:40%"></div>
+        <div class="bar-el" style="height:70%"></div>
+        <div class="bar-el" style="height:50%"></div>
+        <div class="bar-el" style="height:85%"></div>
+        <div class="bar-el" style="height:60%"></div>
+      </div>
+      <p class="mono muted" style="font-size:0.78rem;">monthly expense trend — sample data</p>
+    </div>
+    <div class="project-content">
+      <div class="kicker">minor project · college</div>
+      <h3>Personal Finance Tracker with AI Insights</h3>
+      <p>A desktop/console application that helps a user log income and expenses, then goes a step further than a plain tracker — it analyzes spending patterns and surfaces AI-driven insights and suggestions, so the numbers actually mean something.</p>
+      <ul class="feature-list">
+        <li>Add, edit, and categorize income &amp; expense entries</li>
+        <li>Automatic monthly &amp; category-wise spending summaries</li>
+        <li>AI-based insights that flag unusual spending and predict trends</li>
+        <li>Simple, readable reports generated from stored data</li>
+      </ul>
+      <div class="stack">
+        <span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">scikit-learn</span><span class="tag">SQLite</span><span class="tag">Matplotlib</span>
+      </div>
+      <div class="proj-links">
+        <a href="#">View code ↗</a>
+        <a href="#">Project report ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process" class="wrap">
+  <div class="section-head">
+    <div class="eyebrow"><span class="idx">04</span> how I build</div>
+  </div>
+  <div class="process">
+    <div class="step"><div class="n">01</div><h4>Understand</h4><p>Break the problem into inputs, outputs, and edge cases before writing a line.</p></div>
+    <div class="step"><div class="n">02</div><h4>Plan</h4><p>Sketch logic and data flow on paper, then decide the language and structure.</p></div>
+    <div class="step"><div class="n">03</div><h4>Build</h4><p>Write small, testable pieces in Python or C rather than one giant script.</p></div>
+    <div class="step"><div class="n">04</div><h4>Test</h4><p>Run edge cases on purpose, especially the ones that would break a beginner's code.</p></div>
+    <div class="step"><div class="n">05</div><h4>Refine</h4><p>Clean up logic, add comments, and make the output easy to read.</p></div>
+    <div class="step"><div class="n">06</div><h4>Reflect</h4><p>Note what I'd do differently — this is where the actual learning happens.</p></div>
+  </div>
+</section>
+
+<section id="goals" class="wrap">
+  <div class="section-head">
+    <div class="eyebrow"><span class="idx">05</span> what's next</div>
+  </div>
+  <div class="goals-grid">
+    <div class="goal">
+      <div class="tagline">strengthening fundamentals</div>
+      <h4>Deep dive into DSA</h4>
+      <p>Getting fluent in data structures and algorithms using C, since it forces me to think about memory and efficiency, not just syntax.</p>
+    </div>
+    <div class="goal">
+      <div class="tagline">going deeper into AI</div>
+      <h4>Real ML projects</h4>
+      <p>Moving past tutorials into applied machine learning — starting with predictive models on real datasets, not toy examples.</p>
+    </div>
+    <div class="goal">
+      <div class="tagline">building in public</div>
+      <h4>Open source &amp; internships</h4>
+      <p>Contributing to small open-source projects and looking for an internship where I can learn from people ahead of me.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="stat-strip">
+    <div class="stat"><div class="v">2nd</div><div class="l">year, AI Engineering</div></div>
+    <div class="stat"><div class="v">02</div><div class="l">core languages — Python &amp; C</div></div>
+    <div class="stat"><div class="v">01</div><div class="l">minor project shipped</div></div>
+    <div class="stat"><div class="v">∞</div><div class="l">things left to learn</div></div>
+  </div>
+</section>
+
+<section id="contact" class="wrap">
+  <div class="section-head">
+    <div class="eyebrow"><span class="idx">06</span> contact</div>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <div class="row">
+        <div class="ic">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3 5h18v14H3V5Zm2 2.4V17h14V7.4l-7 5.1-7-5.1Zm.6-.9 6.4 4.7 6.4-4.7H5.6Z" fill="currentColor"/></svg>
+        </div>
+        <div><div class="t">email</div><div class="d">aryan.gaidhane@example.com</div></div>
+      </div>
+      <div class="row">
+        <div class="ic">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z" fill="currentColor"/></svg>
+        </div>
+        <div><div class="t">location</div><div class="d">Nagpur, Maharashtra, India</div></div>
+      </div>
+      <div class="row">
+        <div class="ic">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 13c0 5-3.5 8-7 9.5C9.5 21 6 18 6 13V6l7-3 7 3v7Z" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
+        </div>
+        <div><div class="t">college</div><div class="d">G H Raisoni College, Nagpur</div></div>
+      </div>
+      <div class="row">
+        <div class="ic">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
+        </div>
+        <div><div class="t">status</div><div class="d">Open to internships &amp; project collaborations</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <form onsubmit="event.preventDefault(); this.querySelector('.sent-msg').style.display='block';">
+        <div class="form-grid">
+          <input type="text" placeholder="Your name" required>
+          <input type="email" placeholder="Your email" required>
+        </div>
+        <input type="text" placeholder="Subject" style="margin-bottom:14px;">
+        <textarea placeholder="Write your message..." required></textarea>
+        <button type="submit" class="btn btn-primary" style="border:none;cursor:pointer;">Send message →</button>
+        <p class="sent-msg mono" style="display:none;color:var(--mint);margin-top:14px;font-size:0.82rem;">Message ready — connect this form to an email service (like Formspree) to receive it.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>© 2026 Aryan Ramesh Gaidhane. Built line by line.</div>
+  <div>Nagpur, India</div>
+</footer>
+
+</body>
+</html>
